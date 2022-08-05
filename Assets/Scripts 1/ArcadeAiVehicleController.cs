@@ -56,7 +56,10 @@ public class ArcadeAiVehicleController : MonoBehaviour
 
     private float desiredTurning;
 
-
+    private void Awake()
+    {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
 
     private void Start()
     {

@@ -35,11 +35,12 @@ public class ArcadeVehicleController : MonoBehaviour
     [Range(1, 3)]
     public float MaxPitch;
     public AudioSource SkidSound;
-
+    
     [HideInInspector]
     public float skidWidth;
-
-
+    public int RandomX,RandomZ;
+    public float SpawnTimer;
+    public GameObject PoliceCar;
     private float radius, horizontalInput, verticalInput;
     private Vector3 origin;
 
@@ -53,6 +54,7 @@ public class ArcadeVehicleController : MonoBehaviour
     }
     private void Update()
     {
+      //  Physics.gravity = new Vector3(0, -3.0F, 0);
         if (MovingRight)
         {
             horizontalInput = 1;
@@ -104,6 +106,30 @@ public class ArcadeVehicleController : MonoBehaviour
 
     void FixedUpdate()
     {
+        
+        SpawnTimer += Time.deltaTime;
+        if (SpawnTimer > 3)
+        {
+            RandomX = Random.Range(1, 3);
+            RandomZ = Random.Range(1, 3);
+            if(RandomX==1 && RandomZ == 1)
+            {
+                Instantiate(PoliceCar, new Vector3(transform.position.x - 100, transform.position.y, transform.position.z - 100), Quaternion.identity);
+            }
+            if (RandomX == 1 && RandomZ == 2)
+            {
+                Instantiate(PoliceCar, new Vector3(transform.position.x - 100, transform.position.y, transform.position.z + 100), Quaternion.identity);
+            }
+            if (RandomX == 2 && RandomZ == 1)
+            {
+                Instantiate(PoliceCar, new Vector3(transform.position.x + 100, transform.position.y, transform.position.z - 100), Quaternion.identity);
+            }
+            if (RandomX == 2 && RandomZ == 2)
+            {
+                Instantiate(PoliceCar, new Vector3(transform.position.x + 100, transform.position.y, transform.position.z + 100), Quaternion.identity);
+            }
+            SpawnTimer = 0;
+        }
         carVelocity = carBody.transform.InverseTransformDirection(carBody.velocity);
         if (Input.GetKeyDown(KeyCode.R))
         {
