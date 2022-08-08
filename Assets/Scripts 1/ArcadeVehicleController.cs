@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class ArcadeVehicleController : MonoBehaviour
 {
     public enum groundCheck { rayCast, sphereCaste };
@@ -45,7 +46,13 @@ public class ArcadeVehicleController : MonoBehaviour
     int PoliceNumber;
     private float radius, horizontalInput, verticalInput;
     private Vector3 origin;
-
+    public Image HealtImg;
+    public float MaxHealth;
+    float Health;
+    public GameObject Sphere, body, wheel1, wheel2, wheel3, wheel4;
+    public GameObject ExplodeEffect;
+    public List<GameObject> Skids;
+    public GameObject HealthCanvas;
     private void Start()
     {
         radius = rb.GetComponent<SphereCollider>().radius;
@@ -53,10 +60,16 @@ public class ArcadeVehicleController : MonoBehaviour
         {
             Physics.defaultMaxAngularSpeed = 100;
         }
+        Health = MaxHealth;
     }
     private void Update()
     {
-       
+        HealtImg.fillAmount = Health / MaxHealth;
+        if (Health <= 0)
+        {
+            GetComponent<ArcadeVehicleController>().enabled = false;
+        }
+
       //  Physics.gravity = new Vector3(0, -3.0F, 0);
         if (MovingRight)
         {
@@ -278,6 +291,30 @@ public class ArcadeVehicleController : MonoBehaviour
         if (other.tag == "Respawn")
         {
             SceneManager.LoadScene(0);
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Police")
+        {
+            Health -= 5;
+            if (Health <= 0)
+            {
+                Instantiate(ExplodeEffect, transform.position, Quaternion.identity);
+                GetComponent<BoxCollider>().enabled = false;
+                GetComponent<Rigidbody>().isKinematic = true;
+                Sphere.GetComponent<SphereCollider>().enabled = false;
+                  body.GetComponent<OurParts>().enabled = true;
+                wheel1.GetComponent<OurParts>().enabled = true;
+                 wheel2.GetComponent<OurParts>().enabled = true;
+                 wheel3.GetComponent<OurParts>().enabled = true;
+                 wheel4.GetComponent<OurParts>().enabled = true;
+                HealthCanvas.SetActive(false);
+                for (int i = 0; i < Skids.Count; i++)
+                {
+                    Skids[i].gameObject.SetActive(false);
+                }
+            }
         }
     }
 }
