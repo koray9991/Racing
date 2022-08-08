@@ -24,7 +24,7 @@ public class ArcadeAiVehicleController : MonoBehaviour
     public Transform[] RearWheels = new Transform[2];
     [HideInInspector]
     public Vector3 carVelocity;
-
+    public GameObject ExplodeEffect;
     [Range(0, 10)]
     public float BodyTilt;
     [Header("Audio settings")]
@@ -38,7 +38,7 @@ public class ArcadeAiVehicleController : MonoBehaviour
     [HideInInspector]
     public float skidWidth;
 
-
+    
     private float radius;
     private Vector3 origin;
 
@@ -55,7 +55,8 @@ public class ArcadeAiVehicleController : MonoBehaviour
     public float brakeAngle = 30f;
 
     private float desiredTurning;
-
+    public GameObject Sphere,body, wheel1, wheel2, wheel3, wheel4,light;
+    public bool Rot;
     private void Awake()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -173,11 +174,51 @@ public class ArcadeAiVehicleController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Police" || collision.gameObject.tag == "Player")
+        {
+            Instantiate(ExplodeEffect, transform.position, Quaternion.identity);
+            GetComponent<BoxCollider>().enabled = false;
+          //  Rot = true;
+            Sphere.GetComponent<SphereCollider>().enabled = false;
+           // GetComponent<Rigidbody>().AddForce(Random.Range(-300, 300), Random.Range(200, 300), Random.Range(-300, 300));
+            /* body.transform.parent = null;
+             wheel1.transform.parent = null;
+             wheel2.transform.parent = null;
+             wheel3.transform.parent = null;
+             wheel4.transform.parent = null;
+           // Destroy(GetComponent<Rigidbody>());
+            body.AddComponent<Rigidbody>();
+            body.GetComponent<Rigidbody>().AddForce(Random.Range(-300, 300), Random.Range(200, 300), Random.Range(-300, 300));
+            wheel1.AddComponent<Rigidbody>();
+            wheel1.GetComponent<Rigidbody>().AddForce(Random.Range(-300, 300), Random.Range(200, 300), Random.Range(-300, 300));
+            wheel2.AddComponent<Rigidbody>();
+            wheel2.GetComponent<Rigidbody>().AddForce(Random.Range(-300, 300), Random.Range(200, 300), Random.Range(-300, 300));
+            wheel3.AddComponent<Rigidbody>();
+            wheel3.GetComponent<Rigidbody>().AddForce(Random.Range(-300, 300), Random.Range(200, 300), Random.Range(-300, 300));
+            wheel4.AddComponent<Rigidbody>();
+            wheel4.GetComponent<Rigidbody>().AddForce(Random.Range(-300, 300), Random.Range(200, 300), Random.Range(-300, 300));
+            light.AddComponent<Rigidbody>();
+            light.GetComponent<Rigidbody>().AddForce(Random.Range(-300, 300), Random.Range(200, 300), Random.Range(-300, 300));*/
+            body.GetComponent<Rotate>().enabled = true;
+            wheel1.GetComponent<Rotate>().enabled = true;
+            wheel2.GetComponent<Rotate>().enabled = true;
+            wheel3.GetComponent<Rotate>().enabled = true;
+            wheel4.GetComponent<Rotate>().enabled = true;
+            light.GetComponent<Rotate>().enabled = true;
 
+
+
+            GetComponent<ArcadeAiVehicleController>().enabled = false;
+            Destroy(gameObject,3f);
+        }
+    }
 
 
     void FixedUpdate()
     {
+        
         carVelocity = carBody.transform.InverseTransformDirection(carBody.velocity);
 
         if (Mathf.Abs(carVelocity.x) > 0)

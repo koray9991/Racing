@@ -40,7 +40,9 @@ public class ArcadeVehicleController : MonoBehaviour
     public float skidWidth;
     public int RandomX,RandomZ;
     public float SpawnTimer;
-    public GameObject PoliceCar;
+    //public GameObject PoliceCar;
+    public List<GameObject> PoliceCars;
+    int PoliceNumber;
     private float radius, horizontalInput, verticalInput;
     private Vector3 origin;
 
@@ -54,6 +56,7 @@ public class ArcadeVehicleController : MonoBehaviour
     }
     private void Update()
     {
+       
       //  Physics.gravity = new Vector3(0, -3.0F, 0);
         if (MovingRight)
         {
@@ -112,21 +115,22 @@ public class ArcadeVehicleController : MonoBehaviour
         {
             RandomX = Random.Range(1, 3);
             RandomZ = Random.Range(1, 3);
+            PoliceNumber = Random.Range(0, PoliceCars.Count);
             if(RandomX==1 && RandomZ == 1)
             {
-                Instantiate(PoliceCar, new Vector3(transform.position.x - 100, transform.position.y, transform.position.z - 100), Quaternion.identity);
+                Instantiate(PoliceCars[PoliceNumber], new Vector3(transform.position.x - 100, transform.position.y, transform.position.z - 100), Quaternion.identity);
             }
             if (RandomX == 1 && RandomZ == 2)
             {
-                Instantiate(PoliceCar, new Vector3(transform.position.x - 100, transform.position.y, transform.position.z + 100), Quaternion.identity);
+                Instantiate(PoliceCars[PoliceNumber], new Vector3(transform.position.x - 100, transform.position.y, transform.position.z + 100), Quaternion.identity);
             }
             if (RandomX == 2 && RandomZ == 1)
             {
-                Instantiate(PoliceCar, new Vector3(transform.position.x + 100, transform.position.y, transform.position.z - 100), Quaternion.identity);
+                Instantiate(PoliceCars[PoliceNumber], new Vector3(transform.position.x + 100, transform.position.y, transform.position.z - 100), Quaternion.identity);
             }
             if (RandomX == 2 && RandomZ == 2)
             {
-                Instantiate(PoliceCar, new Vector3(transform.position.x + 100, transform.position.y, transform.position.z + 100), Quaternion.identity);
+                Instantiate(PoliceCars[PoliceNumber], new Vector3(transform.position.x + 100, transform.position.y, transform.position.z + 100), Quaternion.identity);
             }
             SpawnTimer = 0;
         }
