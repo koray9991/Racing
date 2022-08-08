@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4439349, g: 0.4931522, b: 0.57221526, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -388,7 +388,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11235,6 +11235,7 @@ MonoBehaviour:
   - {fileID: 1795392334084143760}
   - {fileID: 1795392335005364799}
   carVelocity: {x: 0, y: 0, z: 0}
+  ExplodeEffect: {fileID: 0}
   BodyTilt: 10
   engineSound: {fileID: 1795392333565180693}
   minPitch: 0.3
@@ -11246,6 +11247,14 @@ MonoBehaviour:
   SpeedAI: 1
   brakeAI: 0
   brakeAngle: 30
+  Sphere: {fileID: 0}
+  body: {fileID: 0}
+  wheel1: {fileID: 0}
+  wheel2: {fileID: 0}
+  wheel3: {fileID: 0}
+  wheel4: {fileID: 0}
+  light: {fileID: 0}
+  Rot: 0
 --- !u!82 &1795392333565180693
 AudioSource:
   m_ObjectHideFlags: 0
@@ -27201,6 +27210,7 @@ MonoBehaviour:
   - {fileID: 1903653338742745934}
   - {fileID: 1903653338372463955}
   carVelocity: {x: 0, y: 0, z: 0}
+  ExplodeEffect: {fileID: 0}
   BodyTilt: 10
   engineSound: {fileID: 1903653339086416582}
   minPitch: 0.3
@@ -27212,6 +27222,14 @@ MonoBehaviour:
   SpeedAI: 1
   brakeAI: 0
   brakeAngle: 30
+  Sphere: {fileID: 0}
+  body: {fileID: 0}
+  wheel1: {fileID: 0}
+  wheel2: {fileID: 0}
+  wheel3: {fileID: 0}
+  wheel4: {fileID: 0}
+  light: {fileID: 0}
+  Rot: 0
 --- !u!1 &1903653339086416587
 GameObject:
   m_ObjectHideFlags: 0
@@ -63939,6 +63957,7 @@ MonoBehaviour:
   - {fileID: 8409997098008873423}
   - {fileID: 8409997096056500594}
   carVelocity: {x: 0, y: 0, z: 0}
+  ExplodeEffect: {fileID: 0}
   BodyTilt: 10
   engineSound: {fileID: 8409997098013648466}
   minPitch: 0.3
@@ -63950,6 +63969,14 @@ MonoBehaviour:
   SpeedAI: 1
   brakeAI: 0
   brakeAngle: 30
+  Sphere: {fileID: 0}
+  body: {fileID: 0}
+  wheel1: {fileID: 0}
+  wheel2: {fileID: 0}
+  wheel3: {fileID: 0}
+  wheel4: {fileID: 0}
+  light: {fileID: 0}
+  Rot: 0
 --- !u!1 &8480654227643290304
 GameObject:
   m_ObjectHideFlags: 0
@@ -79531,6 +79558,7 @@ MonoBehaviour:
   - {fileID: 9130716555278696232}
   - {fileID: 9130716555748714682}
   carVelocity: {x: 0, y: 0, z: 0}
+  ExplodeEffect: {fileID: 0}
   BodyTilt: 10
   engineSound: {fileID: 9130716556534825928}
   minPitch: 0.3
@@ -79542,6 +79570,14 @@ MonoBehaviour:
   SpeedAI: 1
   brakeAI: 0
   brakeAngle: 30
+  Sphere: {fileID: 0}
+  body: {fileID: 0}
+  wheel1: {fileID: 0}
+  wheel2: {fileID: 0}
+  wheel3: {fileID: 0}
+  wheel4: {fileID: 0}
+  light: {fileID: 0}
+  Rot: 0
 --- !u!54 &9130716556534825930
 Rigidbody:
   m_ObjectHideFlags: 0
