@@ -53,6 +53,7 @@ public class ArcadeVehicleController : MonoBehaviour
     public GameObject ExplodeEffect;
     public List<GameObject> Skids;
     public GameObject HealthCanvas;
+    float Restarttimer;
     private void Start()
     {
         radius = rb.GetComponent<SphereCollider>().radius;
@@ -67,7 +68,12 @@ public class ArcadeVehicleController : MonoBehaviour
         HealtImg.fillAmount = Health / MaxHealth;
         if (Health <= 0)
         {
-            GetComponent<ArcadeVehicleController>().enabled = false;
+            Restarttimer += Time.deltaTime;
+            if (Restarttimer > 3)
+            {
+                SceneManager.LoadScene(0);
+            }
+          //  GetComponent<ArcadeVehicleController>().enabled = false;
         }
 
       //  Physics.gravity = new Vector3(0, -3.0F, 0);
